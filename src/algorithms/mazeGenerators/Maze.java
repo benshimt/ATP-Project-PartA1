@@ -65,6 +65,7 @@ public class Maze {
      }
 
      Position chooseRandom(){
+         Random R = new Random();
          int frame=R.nextInt(4);
          while (start.rowidx)
              if (frame == 0) {
