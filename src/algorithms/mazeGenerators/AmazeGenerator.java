@@ -1,6 +1,6 @@
 package algorithms.mazeGenerators;
 
-public abstract class AmazeGenerator implements ImazeGenerator{
+public abstract class AmazeGenerator implements IMazeGenerator {
     @Override
     public long measureAlgorithmTimeMillis(int r,int c){
         long start=System.currentTimeMillis();

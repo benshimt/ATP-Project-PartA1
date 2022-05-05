@@ -11,13 +11,13 @@ public class MyMazeGenerator extends AmazeGenerator {
         maze.setmaze(all1maze(r,c));
 
         //select random start point.
-       Cell start = selectStartP(maze);
+       Position start = maze.getStartPosition();
 
-       Cell curr;
+       Position curr;
        int count; //num of visited neighbors for current cell.
 
        //frontiers list , candidates to be selected as the next cell in the maze.
-       List<Cell> Flist= new ArrayList<>();
+       List<Position> Flist= new ArrayList<>();
        Flist.add(start);
 
         while (!Flist.isEmpty()){
@@ -26,20 +26,22 @@ public class MyMazeGenerator extends AmazeGenerator {
             count=countVisitedN(maze,curr);
 
             if(count<=1){
-                maze.maze[curr.getRowidx()][curr.getColidx()]=0;
+                maze.maze[curr.getRowIndex()][curr.getColumnIndex()]=0;
 
                 //down
-                addValidFrontier(curr.getRowidx()+1, curr.getColidx(), maze,Flist);
+                addValidFrontier(curr.getRowIndex()+1, curr.getColumnIndex(), maze,Flist);
                 //up
-                addValidFrontier(curr.getRowidx()-1, curr.getColidx(), maze,Flist);
+                addValidFrontier(curr.getRowIndex()-1, curr.getColumnIndex(), maze,Flist);
                 //left
-                addValidFrontier(curr.getRowidx(), curr.getColidx()-1, maze,Flist);
+                addValidFrontier(curr.getRowIndex(), curr.getColumnIndex()-1, maze,Flist);
                 //right
-                addValidFrontier(curr.getRowidx(), curr.getColidx()+1, maze,Flist);
+                addValidFrontier(curr.getRowIndex(), curr.getColumnIndex()+1, maze,Flist);
             }
 
         }
-        return maze;}
+        maze.getGoalPosition();
+        return maze;
+   }
 
    private int[][] all1maze(int r,int c) {
         int[][] Nmaze = new int[r][c];
@@ -51,31 +53,28 @@ public class MyMazeGenerator extends AmazeGenerator {
     return Nmaze;}
 
 
-    private Cell selectStartP(Maze maze){
-        Random R = new Random( );
-        return new Cell(R.nextInt(maze.col* maze.row),R.nextInt(maze.col* maze.row));
 
-    }
+
     //return the count of visited neighbors for a cell.
-   private int countVisitedN(Maze m,Cell curr){
+   private int countVisitedN(Maze m, Position curr){
        int Ncount=0;
        //down
-       if(curr.getColidx()<=m.col-1 && curr.getRowidx()+1<m.row-1 && m.maze[curr.getColidx()][curr.getRowidx()+1]==0)
+       if(curr.getRowIndex()+1<m.row && m.maze[curr.getRowIndex()+1][curr.getColumnIndex()]==0)
            Ncount++;
        //up
-       if(curr.getColidx()<=m.col-1 && curr.getRowidx()-1<m.row-1 && m.maze[curr.getColidx()][curr.getRowidx()-1]==0)
+       if(curr.getRowIndex()-1>=0 && m.maze[curr.getRowIndex()-1][curr.getColumnIndex()]==0)
            Ncount++;
        //right
-       if(curr.getColidx()+1<=m.col-1 && curr.getRowidx()<m.row-1 && m.maze[curr.getColidx()+1][curr.getRowidx()]==0)
+       if(curr.getColumnIndex()+1<m.col && m.maze[curr.getRowIndex()][curr.getColumnIndex()+1]==0)
            Ncount++;
        //left
-       if(curr.getColidx()-1<=m.col-1 && curr.getRowidx()<m.row-1 && m.maze[curr.getColidx()-1][curr.getRowidx()]==0)
+       if(curr.getColumnIndex()-1>=0 && m.maze[curr.getRowIndex()][curr.getColumnIndex()-1]==0)
            Ncount++;
        return Ncount;}
 
-    private void addValidFrontier(int r, int c, Maze m,List<Cell> frontiers){
-        if(c<=m.col-1 && r<m.row-1 && m.maze[r][c]==0){
-            frontiers.add(new Cell(r,c));
+    private void addValidFrontier(int r, int c, Maze m,List<Position> frontiers){
+        if(c>=0 && c<m.col && r>=0 && r<m.row && m.maze[r][c]==1){
+            frontiers.add(new Position(r,c));
         }
 
     }

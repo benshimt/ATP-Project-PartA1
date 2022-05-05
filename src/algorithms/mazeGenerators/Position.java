@@ -1,11 +1,11 @@
 package algorithms.mazeGenerators;
 
-public class Cell {
+public class Position {
     int rowidx;
     int colidx;
     int val;
 
-    public Cell(int rowidx, int colidx) {
+    public Position(int rowidx, int colidx) {
         this.rowidx = rowidx;
         this.colidx = colidx;
         this.val = 1;
@@ -19,11 +19,16 @@ public class Cell {
         this.val = val;
     }
 
-    public int getRowidx() {
+    public int getRowIndex() {
         return rowidx;
     }
 
-    public int getColidx() {
+    public int getColumnIndex() {
         return colidx;
+    }
+
+    @Override
+    public String toString(){
+        return String.format("{%d,%d}",rowidx,colidx);
     }
 }
