@@ -15,6 +15,7 @@ public class SimpleMazeGenerator extends AmazeGenerator {
             }
         }
 
+
         maze.setmaze(nmaze);
         return maze;
     }

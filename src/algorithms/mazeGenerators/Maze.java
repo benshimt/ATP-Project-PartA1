@@ -11,74 +11,86 @@ public class Maze {
     Position exit;
 
 
-
     public Maze(int r, int c) {
-        row=r;
-        col=c;
-        maze=new int[row][col];
-        start=null;
-        exit=null;
+        row = r;
+        col = c;
+        maze = new int[row][col];
+        start = null;
+        exit = null;
 
     }
 
-    public void setmaze(int[][] Nmaze){
-        maze=Nmaze;
+    public void setmaze(int[][] Nmaze) {
+        maze = Nmaze;
     }
 
     public Position getStartPosition() {
-        if (start == null && row>0 && col>0) {
-            Random R = new Random();
-            Position startP=new Position(R.nextInt(row), R.nextInt(col));
-            start=startP;
-            return start;
-        } else {
-            return start;
+        if (start == null && row > 0 && col > 0) {
+            start = chooseRandom();
         }
+        return start;
     }
 
     public Position getGoalPosition() {
-     if(exit==null && row>0 && col>0){
+        if (exit == null && row > 0 && col > 0) {
+            boolean bool = false;
+            Position exitP = chooseRandom();
+            //goal point cant be WALL ot equal to start point.
+            while (bool) {
+                if (maze[exitP.rowidx][exitP.colidx] == 0 && exitP!=start){
+                    bool = true;}
+                else {
+                    exitP = chooseRandom();
+                }
+            }
+            exit = exitP;
+        }
+        return exit;
+    }
+
+
+//    public void print() {
+//        for (int i = 0; i < row; i++) {
+//            System.out.println(Arrays.toString(maze[i]));
+//        }
+//    }
+
+
+    public void print(){
+        if(start!=null && exit!=null) {
+            char[][] charArr = new char[row][col];
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < row; j++) {
+                    charArr[i][j] = (char) ('0' + maze[i][j]);
+                }
+            }
+        charArr[exit.getRowIndex()][exit.getColumnIndex()]='E';
+        charArr[start.getRowIndex()][start.getColumnIndex()]='S';
+            for (int i = 0; i < row; i++) {
+                System.out.println(Arrays.toString(charArr[i]));}
+        }
+    }
+
+    Position chooseRandom() {
         Random R = new Random();
-        boolean bool = false;
-
-
-         while (bool) {
-            if (maze[exitP.rowidx][exitP.colidx] == 0)
-                bool = true;
-            else {
-                exitP = new Position(R.nextInt(row), R.nextInt(col));
-            }
+        int frame = R.nextInt(4);
+        Position randomP = new Position(R.nextInt(row), R.nextInt(col));
+        if (frame == 0) {
+            randomP.setRowidx(0);
+            randomP.setColidx(R.nextInt(col));
+        } else if (frame == 1) {
+            randomP.setRowidx(row-1);
+            randomP.setColidx(R.nextInt(col));
+        } else if (frame == 2) {
+            randomP.setRowidx(R.nextInt(row));
+            randomP.setColidx(0);
+        } else {
+            randomP.setRowidx(R.nextInt(row));
+            randomP.setColidx(col-1);
         }
-        exit=exitP;
-        return exit;}
-     else{
-         return exit;
-            }
+        return randomP;
+    }
 
-            }
-
-
-     public void print(){
-        for(int i=0;i<row;i++){
-            System.out.println(Arrays.toString(maze[i]));
-        }
-     }
-
-     Position chooseRandom(){
-         Random R = new Random();
-         int frame=R.nextInt(4);
-         while (start.rowidx)ddv
-             if (frame == 0) {
-
-                 if (0 == start.rowidx&& R.nextInt(col) == start.colidx);
-             } else if (frame == 1) {
-                 Position exitP = new Position(99, R.nextInt(col));
-             } else if (frame == 2) {
-                 Position exitP = new Position(R.nextInt(row), 0);
-             } else {
-                 Position exitP = new Position(R.nextInt(row), 99);
-             }
-     }
 
 
 

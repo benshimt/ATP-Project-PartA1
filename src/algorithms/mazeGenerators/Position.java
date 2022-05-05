@@ -19,6 +19,14 @@ public class Position {
         this.val = val;
     }
 
+    public void setRowidx(int rowidx) {
+        this.rowidx = rowidx;
+    }
+
+    public void setColidx(int colidx) {
+        this.colidx = colidx;
+    }
+
     public int getRowIndex() {
         return rowidx;
     }
