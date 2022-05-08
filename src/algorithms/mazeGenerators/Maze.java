@@ -33,12 +33,12 @@ public class Maze {
 
     public Position getGoalPosition() {
         if (exit == null && row > 0 && col > 0) {
-            boolean bool = false;
+            boolean bool = true;
             Position exitP = chooseRandom();
             //goal point cant be WALL ot equal to start point.
             while (bool) {
-                if (maze[exitP.rowidx][exitP.colidx] == 0 && exitP!=start){
-                    bool = true;}
+                if (maze[exitP.rowidx][exitP.colidx] == 0 && !(exitP.equals(start))){
+                    bool = false;}
                 else {
                     exitP = chooseRandom();
                 }
@@ -48,24 +48,16 @@ public class Maze {
         return exit;
     }
 
-
-//    public void print() {
-//        for (int i = 0; i < row; i++) {
-//            System.out.println(Arrays.toString(maze[i]));
-//        }
-//    }
-
-
     public void print(){
         if(start!=null && exit!=null) {
             char[][] charArr = new char[row][col];
             for (int i = 0; i < row; i++) {
-                for (int j = 0; j < row; j++) {
+                for (int j = 0; j < col; j++) {
                     charArr[i][j] = (char) ('0' + maze[i][j]);
                 }
             }
-        charArr[exit.getRowIndex()][exit.getColumnIndex()]='E';
-        charArr[start.getRowIndex()][start.getColumnIndex()]='S';
+            charArr[exit.getRowIndex()][exit.getColumnIndex()]='E';
+            charArr[start.getRowIndex()][start.getColumnIndex()]='S';
             for (int i = 0; i < row; i++) {
                 System.out.println(Arrays.toString(charArr[i]));}
         }
@@ -98,6 +90,4 @@ public class Maze {
 
 
 
-    }
-
-
+}
