@@ -11,4 +11,3 @@ public abstract class AmazeGenerator implements IMazeGenerator {
 
 
 }
-try1;
