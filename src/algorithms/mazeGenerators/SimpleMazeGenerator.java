@@ -2,6 +2,7 @@ package algorithms.mazeGenerators;
 
 import java.util.Random;
 //tal
+//tal
 public class SimpleMazeGenerator extends AmazeGenerator {
     @Override
     public Maze generate(int r , int c) {
