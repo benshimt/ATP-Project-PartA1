@@ -39,4 +39,28 @@ public class Position {
     public String toString(){
         return String.format("{%d,%d}",rowidx,colidx);
     }
+
+
+
+    //אם יהיה לנו זמן לדדרוס את שווה שווה ולשנות בגט גאול פוסישן
+    @Override
+    public boolean equals(Object P) {
+
+        // If the object is compared with itself then return true
+        if (P == this) {
+            return true;
+        }
+
+
+        /* Check if o is an instance of Complex or not
+          "null instanceof [type]" also returns false */
+        if (!(P instanceof Position)) {
+            return false;
+        }
+        Position p = (Position) P;
+
+        // Compare the data members and return accordingly
+        return Integer.compare(rowidx,p.rowidx) == 0
+                && Integer.compare(colidx,p.colidx) == 0;
+    }
 }
