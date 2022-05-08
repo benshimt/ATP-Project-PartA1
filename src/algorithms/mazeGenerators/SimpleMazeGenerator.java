@@ -37,15 +37,15 @@ public class SimpleMazeGenerator extends AmazeGenerator {
         }
         if(f<0) {
             for (int i = m.start.colidx; i <= m.exit.colidx; i++) {
-                m.maze[m.start.rowidx][i] = 0;
+                m.maze[m.exit.rowidx][i] = 0;
             }
         }else{
-                for (int i=m.exit.colidx;i<=m.start.colidx;i++){
-                    m.maze[m.exit.rowidx][i]=0;
-                }
+            for (int i=m.exit.colidx;i<=m.start.colidx;i++){
+                m.maze[m.start.rowidx][i]=0;
             }
         }
-
-
-
     }
+
+
+
+}
